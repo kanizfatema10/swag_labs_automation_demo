@@ -10,7 +10,7 @@
 
   <name>swag-labs-automation-demo</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://www.google.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,7 +23,7 @@
 	  <dependency>
     	<groupId>org.seleniumhq.selenium</groupId>
     	<artifactId>selenium-java</artifactId>
-    	<version>4.7.2</version>
+    	<version>4.8.1</version>
 	  </dependency>
 
 	  <!-- https://mvnrepository.com/artifact/org.testng/testng -->
