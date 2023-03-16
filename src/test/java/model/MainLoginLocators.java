@@ -6,5 +6,6 @@ public class MainLoginLocators {
     public static By loginUserNameField = By.id("user-name");
     public static By loginPasswordField = By.id("password");
     public static By loginButtonField = By.id("login-button");
+    public static By appLogoName = By.cssSelector(".app_logo");
 
 }
