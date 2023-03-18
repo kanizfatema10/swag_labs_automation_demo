@@ -23,12 +23,20 @@ public class MainLoginPage extends Base {
         driver.get(credentials.baseUrl);
     }
 
-    public void setEmail(String loginUserName){
+    public void setUserName(String loginUserName){
         commonMethods.setText(MainLoginLocators.loginUserNameField, loginUserName);
+    }
+
+    public void setInvalidUserName(String invalidUserName){
+        commonMethods.setText(MainLoginLocators.loginUserNameField, invalidUserName);
     }
 
     public void setPassword(String loginPassword){
         commonMethods.setText(MainLoginLocators.loginPasswordField, loginPassword);
+    }
+
+    public void setInvalidPassword(String invalidPassword){
+        commonMethods.setText(MainLoginLocators.loginPasswordField, invalidPassword);
     }
 
     public void clickOnLogin(){
