@@ -46,7 +46,7 @@ public class MenuTest extends Base{
         inventoryPage.clickOnLogoutMenu();
         UtilMethods.waitForSeconds(1);
         String expectedLoginPageURL = "https://www.saucedemo.com/";
-        String actualLoginPageURL = inventoryPage.getAboutPageURL();
+        String actualLoginPageURL = inventoryPage.getLoginPageURL();
         
         Assert.assertEquals(actualLoginPageURL, expectedLoginPageURL);
         System.out.println("Logout is working fine");

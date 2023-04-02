@@ -19,9 +19,13 @@ public class InventoryLocators {
     public static By backToProductButton = By.id("back-to-products");
     public static By addToCardSauceLabsBackpack = By.id("add-to-cart-sauce-labs-backpack");
     public static By removeSauceLabsBackpack = By.id("remove-sauce-labs-backpack");
-    public static By shoppingCardLink = By.id("shopping_cart_link");
-    public static By shoppingCardBadge = By.id("shopping_cart_badge");
+    public static By addToCartSauceLabBoltTshirt = By.id("add-to-cart-sauce-labs-bolt-t-shirt");
+    public static By removeSauceLabBoltTshirt = By.id("remove-sauce-labs-bolt-t-shirt");
+    public static By addToCartSauceLabBikeLight = By.id("add-to-cart-sauce-labs-bike-light");
+    public static By shoppingCartLink = By.id("shopping_cart_container");
+    public static By shoppingCartBadge = By.className("shopping_cart_badge");
     public static By yourCartTitle = By.xpath("//span[@class='title'] [contains(text(),'Your Cart')]");
+    public static By sauceLabBackpackAtCartItem = By.xpath("(//div[@class='cart_item']//div[@class='inventory_item_name'])[contains(text(),'Sauce Labs Backpack')]");
     public static By continueShoppingButton = By.id("continue-shopping");
     public static By checkoutButton = By.id("checkout");
 
