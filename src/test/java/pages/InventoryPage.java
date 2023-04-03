@@ -7,10 +7,12 @@ import model.CommonMethods;
 import model.InventoryLocators;
 
 public class InventoryPage extends Base{
+
     RemoteWebDriver driver;
     CommonMethods commonMethods;
 
     public InventoryPage(RemoteWebDriver driver){
+        //driver = super.getActiveDriver();
         this.driver = driver;
         commonMethods = new CommonMethods(this.driver);
     }
@@ -47,7 +49,7 @@ public class InventoryPage extends Base{
         commonMethods.clickOnButton(InventoryLocators.backToProductButton);
     }
 
-    public void clickOnAddToCardSaucaeLabBackpack( ){
+    public void clickOnAddToCartSaucaeLabBackpack(){
         commonMethods.clickOnButton(InventoryLocators.addToCardSauceLabsBackpack);
     }
 
@@ -100,5 +102,9 @@ public class InventoryPage extends Base{
 
     public void clickOnContinueShoppingButton(){
         commonMethods.clickOnButton(InventoryLocators.continueShoppingButton);
+    }
+
+    public void clickOnSauceLabsBackpackRemoveButton(){
+        commonMethods.clickOnButton(InventoryLocators.removeSauceLabsBackpack);
     }
 }
