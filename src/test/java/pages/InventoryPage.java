@@ -1,5 +1,9 @@
 package pages;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import base.Base;
@@ -107,4 +111,49 @@ public class InventoryPage extends Base{
     public void clickOnSauceLabsBackpackRemoveButton(){
         commonMethods.clickOnButton(InventoryLocators.removeSauceLabsBackpack);
     }
+
+    public WebElement getInventoryItemList(){
+       WebElement inventoryItemList = driver.findElement(InventoryLocators.inventoryItemList);
+       return inventoryItemList;
+    }
+
+    public void clickOnProductSortButton(){
+        commonMethods.clickOnButton(InventoryLocators.productFilter);
+    }
+
+    public void clickOnLowToHighPriceSort(){
+        commonMethods.clickOnButton(InventoryLocators.priceLowToHighFilterOption);
+    }
+
+    public void clickOnHighToLowPriceSort(){
+        commonMethods.clickOnButton(InventoryLocators.priceHighToLowFilterOption);
+    }
+
+    public List<String> getOriginalItemPriceListExtracted(WebElement itemPriceList){
+        return itemPriceList.findElements(InventoryLocators.priceOfEachItem)
+                                            .stream()
+                                            .map(priceWithoutDollarSign -> priceWithoutDollarSign.getText().replace("$", ""))
+                                            .collect(Collectors.toList());
+    }
+
+    public List<Double> convertItemPriceListToDouble(List<String> originalItemPriceList){
+        return originalItemPriceList        .stream()
+                                            .map(Double::parseDouble)
+                                            .collect(Collectors.toList());
+    }
+
+    public List<String> convertItemPriceListToString(List<Double> doubleOriginalPriceList){
+        return doubleOriginalPriceList      .stream()
+                                            .map(String::valueOf)
+                                            .collect(Collectors.toList());
+    }
+
+    public List<String> getSortedPriceList(WebElement itemListAfterSorting){
+        return itemListAfterSorting.findElements(InventoryLocators.priceOfEachItem)
+                                            .stream()
+                                            .map(priceWithoutDollarSign -> priceWithoutDollarSign.getText().replace("$", ""))
+                                            .collect(Collectors.toList());
+    }
+
+    
 }
