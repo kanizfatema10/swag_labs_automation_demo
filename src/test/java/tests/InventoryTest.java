@@ -1,16 +1,15 @@
 package tests;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import base.Base;
 import model.Credentials;
-import model.InventoryLocators;
 import model.UtilMethods;
 import pages.InventoryPage;
 import pages.MainLoginPage;
@@ -181,6 +180,7 @@ public class InventoryTest extends Base{
 
         Assert.assertTrue(currentCartNumber == 2, "Shopping cart number has not been decreased.");
         System.out.println("Shopping cart number has decreased successfully");
+
     }
 
     @Test (priority = 9)
@@ -188,20 +188,15 @@ public class InventoryTest extends Base{
         setInventoryPage();
         loginToSauceLabDemo();
 
-        // Identify the element that represents the list of items and store it in a WebElement object
         WebElement itemPriceList = inventoryPage.getInventoryItemList();
 
-        // Extract the text values of all the items in the list and store them in a List of String objects
         List<String> originalItemPriceList = inventoryPage.getOriginalItemPriceListExtracted(itemPriceList);
         System.out.println(originalItemPriceList);
 
-        // Convert the List of String objects into a List of Integer objects
         List<Double> doubleOriginalPriceList = inventoryPage.convertItemPriceListToDouble(originalItemPriceList);
 
-        // Sort the List of Integer objects from lowest to highest
         Collections.sort(doubleOriginalPriceList);
 
-        // Convert the List of Integer objects back into a List of String objects
         List<String> expectedLowToHighSortedPriceList = inventoryPage.convertItemPriceListToString(doubleOriginalPriceList);
         System.out.println(expectedLowToHighSortedPriceList);
 
@@ -210,14 +205,12 @@ public class InventoryTest extends Base{
         inventoryPage.clickOnLowToHighPriceSort();
         UtilMethods.waitForSeconds(1);
 
-        // Identify the element that represents the list of items after sorting and store it in a WebElement object
         WebElement itemListAfterSorting = inventoryPage.getInventoryItemList();
 
-        // Extract the text values of all the items in the list and store them in a List of String objects
         List<String> actualLowToHightSortedPriceList = inventoryPage.getSortedPriceList(itemListAfterSorting);
 
-        // Compare the sorted List of String objects with the original List of String objects
         Assert.assertEquals(actualLowToHightSortedPriceList, expectedLowToHighSortedPriceList);
+        System.out.println("High to low sorting is working fine");
     }
 
     @Test (priority = 10)
@@ -225,20 +218,15 @@ public class InventoryTest extends Base{
         setInventoryPage();
         loginToSauceLabDemo();
 
-        // Identify the element that represents the list of items and store it in a WebElement object
         WebElement itemPriceList = inventoryPage.getInventoryItemList();
 
-        // Extract the text values of all the items in the list and store them in a List of String objects
         List<String> originalItemPriceList = inventoryPage.getOriginalItemPriceListExtracted(itemPriceList);
         System.out.println(originalItemPriceList);
 
-        // Convert the List of String objects into a List of Integer objects
         List<Double> doubleOriginalPriceList = inventoryPage.convertItemPriceListToDouble(originalItemPriceList);
 
-        // Sort the List of Integer objects from lowest to highest
         Collections.sort(doubleOriginalPriceList, Collections.reverseOrder());
 
-        // Convert the List of Integer objects back into a List of String objects
         List<String> expectedHighToLowSortedPriceList = inventoryPage.convertItemPriceListToString(doubleOriginalPriceList);
         System.out.println(expectedHighToLowSortedPriceList);
 
@@ -247,16 +235,50 @@ public class InventoryTest extends Base{
         inventoryPage.clickOnHighToLowPriceSort();
         UtilMethods.waitForSeconds(1);
 
-        // Identify the element that represents the list of items after sorting and store it in a WebElement object
         WebElement itemListAfterSorting = inventoryPage.getInventoryItemList();
 
-        // Extract the text values of all the items in the list and store them in a List of String objects
         List<String> actualHighToLowtSortedPriceList = inventoryPage.getSortedPriceList(itemListAfterSorting);
 
-        // Compare the sorted List of String objects with the original List of String objects
         Assert.assertEquals(actualHighToLowtSortedPriceList, expectedHighToLowSortedPriceList);
+        System.out.println("Low to high sorting is working fine");
     }
 
+    @Test(priority = 11)
+    public void aToZDefaultSortingTesting(){
+        setInventoryPage();
+        loginToSauceLabDemo();
+
+        List<WebElement> itemList = inventoryPage.getItemList();
+        List<String> actualItemNameList = inventoryPage.getItemNameList(itemList);
+        List<String> expectedSortedItemList = inventoryPage.getExpectedDefaultSortedItemList(actualItemNameList);
+
+        Assert.assertEquals(actualItemNameList, expectedSortedItemList);
+        System.out.println("Item list is by default sorted from A to Z");
+    }
+
+    @Test(priority = 12)
+    public void zToASortingTest(){
+        setInventoryPage();
+        loginToSauceLabDemo();
+
+        List<WebElement> itemList = inventoryPage.getItemList();
+        List<String> itemNameList = inventoryPage.getItemNameList(itemList);
+        List<String> expectedSortedItemList = inventoryPage.getExpectedSortedItemList(itemNameList);
+        System.out.println(expectedSortedItemList);
+
+        inventoryPage.clickOnProductSortButton();
+        UtilMethods.waitForSeconds(1);
+        inventoryPage.clickOnZtoASortOption();
+        UtilMethods.waitForSeconds(1);
+
+        List<WebElement> itemListAfterSorting = inventoryPage.getItemList();
+        List<String> actualSortedItemList = inventoryPage.getItemNameList(itemListAfterSorting);
+        System.out.println(actualSortedItemList);
+
+        Assert.assertEquals(actualSortedItemList, expectedSortedItemList);
+        System.out.println("Z to A sorting is working fine");
+
+    }
 
     private void loginToSauceLabDemo(){
 

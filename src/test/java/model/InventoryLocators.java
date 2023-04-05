@@ -30,6 +30,7 @@ public class InventoryLocators {
     public static By checkoutButton = By.id("checkout");
     public static By inventoryItemList = By.className("inventory_list");
     public static By priceOfEachItem = By.xpath("//div[@class='inventory_item_price']");
+    public static By inventoryItemNameList = By.className("inventory_item_name");
 
 
 

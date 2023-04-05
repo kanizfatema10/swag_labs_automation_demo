@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,29 +64,24 @@ public class InventoryPage extends Base{
     }
 
     public String getActualRemoveButtonText(){
-        String actualRemoveButtonText = driver.findElement(InventoryLocators.removeSauceLabsBackpack).getText();
-        return actualRemoveButtonText;
+        return driver.findElement(InventoryLocators.removeSauceLabsBackpack).getText();
     }
 
     public String getActualProductPageTitle(){
-        String actualProductPageTitle = driver.findElement(InventoryLocators.inventoryPageTitle).getText();
-        return actualProductPageTitle;
+        return driver.findElement(InventoryLocators.inventoryPageTitle).getText();
     }
 
     public String getActualFirstItemName(){
-        String actualFirstItemName = driver.findElement(InventoryLocators.itemNameInDetailPage).getText();
-        return actualFirstItemName;
+        return driver.findElement(InventoryLocators.itemNameInDetailPage).getText();
     }
 
     public Integer getCartCurrentNumber(){
         String cartNumberString = driver.findElement(InventoryLocators.shoppingCartBadge).getText();
-        int cartCurrentNumberInt = Integer.parseInt(cartNumberString);
-        return cartCurrentNumberInt;
+        return Integer.parseInt(cartNumberString);
     }
 
     public String getSauceLabBackpackAtCartItem(){
-        String actualAddedItemToCart = driver.findElement(InventoryLocators.sauceLabBackpackAtCartItem).getText();
-        return actualAddedItemToCart;
+        return driver.findElement(InventoryLocators.sauceLabBackpackAtCartItem).getText();
     }
 
     public void clickOnAddToCartSauceLabsBikeLight(){
@@ -153,6 +150,37 @@ public class InventoryPage extends Base{
                                             .stream()
                                             .map(priceWithoutDollarSign -> priceWithoutDollarSign.getText().replace("$", ""))
                                             .collect(Collectors.toList());
+    }
+
+    public List<WebElement> getItemList(){
+        return driver.findElements(InventoryLocators.inventoryItemNameList);
+    }
+
+    public List<String> getItemNameList(List<WebElement> itemList){
+        return itemList
+                        .stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList());
+    }
+
+    public List<String> getExpectedDefaultSortedItemList(List<String> itemNameList){
+
+        List<String> expectedSortedItemName = new ArrayList<>(itemNameList);
+        Collections.sort(expectedSortedItemName);
+
+        return expectedSortedItemName;
+    }
+
+    public List<String> getExpectedSortedItemList(List<String> itemNameList){
+
+        List<String> expectedSortedItemName = new ArrayList<>(itemNameList);
+        Collections.sort(expectedSortedItemName, Collections.reverseOrder());
+
+        return expectedSortedItemName;
+    }
+
+    public void clickOnZtoASortOption(){
+        commonMethods.clickOnButton(InventoryLocators.zToaFilterOption);
     }
 
     
