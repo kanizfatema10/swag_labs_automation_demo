@@ -22,6 +22,7 @@ public class InventoryLocators {
     public static By addToCartSauceLabBoltTshirt = By.id("add-to-cart-sauce-labs-bolt-t-shirt");
     public static By removeSauceLabBoltTshirt = By.id("remove-sauce-labs-bolt-t-shirt");
     public static By addToCartSauceLabBikeLight = By.id("add-to-cart-sauce-labs-bike-light");
+    public static By removeSauceLabsBikeLight = By.id("remove-sauce-labs-bike-light");
     public static By shoppingCartLink = By.id("shopping_cart_container");
     public static By shoppingCartBadge = By.className("shopping_cart_badge");
     public static By yourCartTitle = By.xpath("//span[@class='title'] [contains(text(),'Your Cart')]");

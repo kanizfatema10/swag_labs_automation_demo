@@ -92,6 +92,10 @@ public class InventoryPage extends Base{
         commonMethods.clickOnButton(InventoryLocators.addToCartSauceLabBoltTshirt);
     }
 
+    public void clickOnRemoveSauceLabsBikeLight(){
+        commonMethods.clickOnButton(InventoryLocators.removeSauceLabsBikeLight);
+    }
+
     public void clickOnRemoveSauceLabsBoltTshirt(){
         commonMethods.clickOnButton(InventoryLocators.removeSauceLabBoltTshirt);
     }

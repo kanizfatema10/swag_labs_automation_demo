@@ -33,7 +33,7 @@ public class MainLoginTest extends Base{
         mainLoginPage.setPassword(password);
         UtilMethods.waitForSeconds(0.5);  
         mainLoginPage.clickOnLogin();
-        UtilMethods.waitForSeconds(3);
+        UtilMethods.waitForSeconds(1);
         
         checkAssertion(userName, password);
     }

@@ -301,4 +301,6 @@ public class InventoryTest extends Base{
         driver = super.getActiveDriver();
         inventoryPage = new InventoryPage(driver);
     }
+
+
 }

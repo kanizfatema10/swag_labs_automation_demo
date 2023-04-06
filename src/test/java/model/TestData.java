@@ -21,5 +21,17 @@ public class TestData {
     };
 }
 
+    @DataProvider(name = "checkoutInfo")
+
+    public Object[][] getCheckoutInfoInput() {
+    // return a two-dimensional object array with test data
+    return new Object[][] { 
+        {"","",""},
+        {"","Jener","1577"},
+        { "Kylee", "","5655" }, 
+        { "Kylee", "Jener", "" }, 
+        { "Kylee", "Jener", "8873" }, 
+    };
+}
     
 }
