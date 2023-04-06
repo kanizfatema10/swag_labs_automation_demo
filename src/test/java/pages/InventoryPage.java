@@ -18,9 +18,12 @@ public class InventoryPage extends Base{
     CommonMethods commonMethods;
 
     public InventoryPage(RemoteWebDriver driver){
-        //driver = super.getActiveDriver();
         this.driver = driver;
         commonMethods = new CommonMethods(this.driver);
+    }
+
+    public String getAppLogoName(){
+        return driver.findElement(InventoryLocators.appLogoName).getText();
     }
     
     public void clickOnAboutMenu(){

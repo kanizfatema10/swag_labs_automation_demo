@@ -43,4 +43,16 @@ public class MainLoginPage extends Base {
         commonMethods.clickOnButton(MainLoginLocators.loginButtonField);
     }
 
+    public String getErrorMessageForEmptyUsername(){
+        return driver.findElement(MainLoginLocators.errorMessageForEmptyUserName).getText();
+    }
+
+    public String getErrorMessageForEmptyPassword(){
+        return driver.findElement(MainLoginLocators.errorMessageForEmptyPassword).getText();
+    }
+
+    public String getErrorMessageForWrongCredential(){
+        return driver.findElement(MainLoginLocators.errorMessageForWrongCredential).getText();
+    }
+
 }
