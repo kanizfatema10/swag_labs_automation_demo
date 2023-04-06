@@ -74,12 +74,17 @@ public class CheckoutTest extends Base{
         checkoutPage.setPostalCode(postalCode);
         UtilMethods.waitForSeconds(1);
 
+        checkoutPage.clickOnContinueCheckoutButton();
+        UtilMethods.waitForSeconds(1);
+
         checkAssertion(firstName, lastName, postalCode);
 
         if (!firstName.isEmpty() && !lastName.isEmpty() && !postalCode.isEmpty()) {
-            // checkoutPage.clickOnCancelCheckoutButton();
-            // inventoryPage.clickOnSauceLabsBackpackRemoveButton(); 
-             return;
+            checkoutPage.clickOnCancelCheckoutButton();
+            UtilMethods.waitForSeconds(1);
+            inventoryPage.clickOnSauceLabsBackpackRemoveButton(); 
+            UtilMethods.waitForSeconds(1);
+            return;
         }
 
         checkoutPage.clickOnCancelCheckoutButton();
@@ -127,6 +132,15 @@ public class CheckoutTest extends Base{
         Assert.assertEquals(actulaSubTotalPriceWithoutTax, expectedSubTotalPriceWithoutTax);
         System.out.println("Sub total price calculation is okay");
 
+        checkoutPage.clickOnCancelButtonFromCheckoutOverview();
+        UtilMethods.waitForSeconds(1);
+        inventoryPage.clickOnSauceLabsBackpackRemoveButton();
+        UtilMethods.waitForSeconds(1);
+        inventoryPage.clickOnRemoveSauceLabsBikeLight();
+        UtilMethods.waitForSeconds(1);
+
+
+
     }
 
 
@@ -164,6 +178,13 @@ public class CheckoutTest extends Base{
 
         Assert.assertEquals(actualTotalPayableAmount, expectedTotalPayableAmount);
         System.out.println("Total payable amount calculation is okay");
+
+        checkoutPage.clickOnCancelButtonFromCheckoutOverview();
+        UtilMethods.waitForSeconds(1);
+        inventoryPage.clickOnSauceLabsBackpackRemoveButton();
+        UtilMethods.waitForSeconds(1);
+        inventoryPage.clickOnRemoveSauceLabsBikeLight();
+        UtilMethods.waitForSeconds(1);
     }
 
     @Test(priority = 5)
@@ -198,6 +219,11 @@ public class CheckoutTest extends Base{
 
         Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
         System.out.println("Cancel button is working fine");
+
+        inventoryPage.clickOnSauceLabsBackpackRemoveButton();
+        UtilMethods.waitForSeconds(1);
+        inventoryPage.clickOnRemoveSauceLabsBikeLight();
+        UtilMethods.waitForSeconds(1);
     }
 
     @Test(priority = 6)
