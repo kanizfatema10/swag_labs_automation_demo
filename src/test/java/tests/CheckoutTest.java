@@ -2,7 +2,12 @@ package tests;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+//import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
+
+//import com.aventstack.extentreports.ExtentReports;
+//import com.aventstack.extentreports.ExtentTest;
+//import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import base.Base;
 import model.Credentials;
@@ -14,14 +19,17 @@ import pages.MainLoginPage;
 
 
 public class CheckoutTest extends Base{
+    
     RemoteWebDriver driver;
     Credentials credentials = new Credentials();
     InventoryPage inventoryPage;
     CheckoutPage checkoutPage;
     MainLoginPage mainLoginPage;
 
-    @Test(priority = 1)
+
+    @Test(priority = 1, groups = "checkout")
     public void checkoutButtonTest(){
+        // ExtentTest test = extent.createTest("Checking the checkout button");
         loginToSauceLabDemo();
         setInventoryPage();
         setCheckoutPage();
@@ -39,7 +47,9 @@ public class CheckoutTest extends Base{
         String expectedTitleOfCheckoutYourInfoPage = "Checkout: Your Information";
 
         Assert.assertEquals(actualTitleOfCheckoutYourInfoPage, expectedTitleOfCheckoutYourInfoPage);
-        System.out.println("Successfully landed on the checkout your info page");
+        //System.out.println("Successfully landed on the checkout your info page");
+        // test.pass("Successfully landed on the checkout your info page");
+ 
 
         checkoutPage.clickOnCancelCheckoutButton();
         UtilMethods.waitForSeconds(1);
@@ -52,7 +62,7 @@ public class CheckoutTest extends Base{
 
     }
 
-    @Test(priority = 2, dataProvider = "checkoutInfo", dataProviderClass = TestData.class)
+    @Test(priority = 2, dataProvider = "checkoutInfo", dataProviderClass = TestData.class, groups = "checkout")
     public void checkoutInformationTest(String firstName, String lastName, String postalCode){
 
         loginToSauceLabDemo();
@@ -97,7 +107,7 @@ public class CheckoutTest extends Base{
         
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, groups = "checkout")
     public void totalPriceWithoutTaxTest(){
         loginToSauceLabDemo();
         setInventoryPage();
@@ -139,12 +149,10 @@ public class CheckoutTest extends Base{
         inventoryPage.clickOnRemoveSauceLabsBikeLight();
         UtilMethods.waitForSeconds(1);
 
-
-
     }
 
 
-    @Test(priority = 4)
+    @Test(priority = 4, groups = "checkout")
     public void totalPriceTest(){
         loginToSauceLabDemo();
         setInventoryPage();
@@ -187,7 +195,7 @@ public class CheckoutTest extends Base{
         UtilMethods.waitForSeconds(1);
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, groups = "checkout")
     public void cancelButtonTest(){
         loginToSauceLabDemo();
         setInventoryPage();
@@ -226,7 +234,7 @@ public class CheckoutTest extends Base{
         UtilMethods.waitForSeconds(1);
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6, groups = "checkout")
     public void completeCheckoutTest(){
         loginToSauceLabDemo();
         setInventoryPage();
@@ -261,7 +269,7 @@ public class CheckoutTest extends Base{
         System.out.println("Checkout has been completed successfully");
     }
 
-    @Test(priority = 7)
+    @Test(priority = 7, groups = "checkout")
     public void backHomeButtonTest(){
         loginToSauceLabDemo();
         setInventoryPage();
@@ -361,4 +369,6 @@ public class CheckoutTest extends Base{
         driver = super.getActiveDriver();
         checkoutPage = new CheckoutPage(driver);
     }
+
+
 }

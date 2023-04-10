@@ -19,7 +19,7 @@ public class MainLoginTest extends Base{
     InventoryPage inventoryPage;
     Credentials credentials = new Credentials();   
 
-    @Test(dataProvider = "inputs", dataProviderClass = TestData.class)
+    @Test(dataProvider = "inputs", dataProviderClass = TestData.class, groups = "login")
     public void mainLoginTest(String userName, String password){
 
         setMainLoginPage();

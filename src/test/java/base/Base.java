@@ -6,31 +6,50 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 
 public class Base {
     
-    private enum Drivers{
+    private enum Drivers {
         None,
         ChromeDriver,
         FirefoxDriver,
     }
 
-    RemoteWebDriver activeDriver;
-    
-    @BeforeTest
-    public void setUpBrowser(){
-        setActiveDriver(Drivers.ChromeDriver);        
+    private RemoteWebDriver activeDriver;
+
+    protected static ExtentReports extent = new ExtentReports();
+    private ExtentSparkReporter sparkReporter = new ExtentSparkReporter("src/test/reports/swag_labs_automation_test.html");
+
+    @BeforeMethod
+    public void setUpBrowser() {
+        setActiveDriver(Drivers.ChromeDriver);
         activeDriver.manage().window().maximize();
         activeDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
     }
 
-    @AfterTest
+    @AfterMethod
     public void closeBrowser(){
         activeDriver.close();
         //activeDriver.quit();
+    }
+
+    @BeforeTest
+    public void beforeTest(){
+        extent.attachReporter(sparkReporter);
+    }
+
+    @AfterTest
+    public void afterTest(){
+        extent.flush();
     }
 
     private void setActiveDriver(Drivers driver){

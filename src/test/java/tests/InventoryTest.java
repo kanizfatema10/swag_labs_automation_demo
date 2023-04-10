@@ -21,7 +21,7 @@ public class InventoryTest extends Base{
     Integer currentCartNumber;
     InventoryPage inventoryPage;
 
-    @Test(priority = 1)
+    @Test(priority = 1, groups = "inventory")
     public void itemDetailViewTest(){
 
         setInventoryPage();
@@ -37,7 +37,7 @@ public class InventoryTest extends Base{
         System.out.println("Item name on product page and item name on detail page matches");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, groups = "inventory")
     public void backButtonToProductPageTest(){
 
         setInventoryPage();
@@ -55,7 +55,7 @@ public class InventoryTest extends Base{
         System.out.println("Successfully back to products page from item detail page");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, groups = "inventory")
     public void buttonTextChangeToRemoveTest(){
 
         setInventoryPage();
@@ -74,7 +74,7 @@ public class InventoryTest extends Base{
         UtilMethods.waitForSeconds(1);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, groups = "inventory")
     public void cartNumberIncrementTest(){
         
         setInventoryPage();
@@ -92,7 +92,7 @@ public class InventoryTest extends Base{
         UtilMethods.waitForSeconds(1);
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, groups = "inventory")
     public void addedItemOnCartDetailTest(){
         
         setInventoryPage();
@@ -114,7 +114,7 @@ public class InventoryTest extends Base{
         UtilMethods.waitForSeconds(1);
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6, groups = "inventory")
     public void continueShoppingButtonTest(){
         
         setInventoryPage();
@@ -137,7 +137,7 @@ public class InventoryTest extends Base{
 
     }
 
-    @Test(priority = 7)
+    @Test(priority = 7, groups = "inventory")
     public void buttonTextChangeToAddToCart(){
        
         setInventoryPage();
@@ -156,7 +156,7 @@ public class InventoryTest extends Base{
 
     }
 
-    @Test(priority = 8)
+    @Test(priority = 8, groups = "inventory")
     public void cartNumberDecrementTest(){
         
         setInventoryPage();
@@ -183,7 +183,7 @@ public class InventoryTest extends Base{
 
     }
 
-    @Test (priority = 9)
+    @Test (priority = 9, groups = {"inventory", "inventorySort"})
     public void priceLowToHighSortingTest(){
         setInventoryPage();
         loginToSauceLabDemo();
@@ -213,7 +213,7 @@ public class InventoryTest extends Base{
         System.out.println("High to low sorting is working fine");
     }
 
-    @Test (priority = 10)
+    @Test (priority = 10, groups = {"inventory", "inventorySort"})
     public void priceHighToLowSortingTest(){
         setInventoryPage();
         loginToSauceLabDemo();
@@ -243,7 +243,7 @@ public class InventoryTest extends Base{
         System.out.println("Low to high sorting is working fine");
     }
 
-    @Test(priority = 11)
+    @Test(priority = 11, groups = {"inventory", "inventorySort"})
     public void aToZDefaultSortingTesting(){
         setInventoryPage();
         loginToSauceLabDemo();
@@ -256,7 +256,7 @@ public class InventoryTest extends Base{
         System.out.println("Item list is by default sorted from A to Z");
     }
 
-    @Test(priority = 12)
+    @Test(priority = 12, groups = {"inventory", "inventorySort"})
     public void zToASortingTest(){
         setInventoryPage();
         loginToSauceLabDemo();
