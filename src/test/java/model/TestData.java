@@ -27,9 +27,9 @@ public class TestData {
     // return a two-dimensional object array with test data
     return new Object[][] { 
         {"","",""},
-        // {"","Jener","1577"},
-        // { "Kylee", "","5655" }, 
-        // { "Kylee", "Jener", "" }, 
+        {"","Jener","1577"},
+        { "Kylee", "","5655" }, 
+        { "Kylee", "Jener", "" }, 
         { "Kylee", "Jener", "8873" }, 
     };
 }

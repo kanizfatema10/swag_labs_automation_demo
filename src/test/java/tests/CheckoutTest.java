@@ -2,12 +2,9 @@ package tests;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-//import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-
-//import com.aventstack.extentreports.ExtentReports;
-//import com.aventstack.extentreports.ExtentTest;
-//import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 
 import base.Base;
 import model.Credentials;
@@ -26,31 +23,33 @@ public class CheckoutTest extends Base{
     CheckoutPage checkoutPage;
     MainLoginPage mainLoginPage;
 
-
     @Test(priority = 1, groups = "checkout")
     public void checkoutButtonTest(){
-        // ExtentTest test = extent.createTest("Checking the checkout button");
+        ExtentTest test = extent.createTest("Checkout Button Test");
         loginToSauceLabDemo();
+        test.log(Status.INFO, "User logged in");
         setInventoryPage();
         setCheckoutPage();
 
         inventoryPage.clickOnAddToCartSaucaeLabBackpack();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Backback");
         UtilMethods.waitForSeconds(1);
         inventoryPage.clickOnAddToCartSauceLabsBikeLight();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Bike Light");
         UtilMethods.waitForSeconds(1);
         inventoryPage.clickOnCart();
+        test.log(Status.INFO, "Clicked on cart");
         UtilMethods.waitForSeconds(1);
         checkoutPage.clickOnCheckoutButton();
+        test.log(Status.INFO, "Clicked on checkout button");
         UtilMethods.waitForSeconds(1);
 
         String actualTitleOfCheckoutYourInfoPage = checkoutPage.getActualCheckoutInfoTitle();
         String expectedTitleOfCheckoutYourInfoPage = "Checkout: Your Information";
 
         Assert.assertEquals(actualTitleOfCheckoutYourInfoPage, expectedTitleOfCheckoutYourInfoPage);
-        //System.out.println("Successfully landed on the checkout your info page");
-        // test.pass("Successfully landed on the checkout your info page");
+        test.log(Status.PASS, "Successfully landed on the checkout your info page");
  
-
         checkoutPage.clickOnCancelCheckoutButton();
         UtilMethods.waitForSeconds(1);
         inventoryPage.clickOnContinueShoppingButton();
@@ -64,30 +63,39 @@ public class CheckoutTest extends Base{
 
     @Test(priority = 2, dataProvider = "checkoutInfo", dataProviderClass = TestData.class, groups = "checkout")
     public void checkoutInformationTest(String firstName, String lastName, String postalCode){
-
+        ExtentTest test = extent.createTest("Checkout info page test");
         loginToSauceLabDemo();
+        test.log(Status.INFO, "User logged in");
         setInventoryPage();
         setCheckoutPage();
 
         inventoryPage.clickOnAddToCartSaucaeLabBackpack();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Backback");
         UtilMethods.waitForSeconds(1);
         inventoryPage.clickOnCart();
+        test.log(Status.INFO, "Clicked on cart");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.clickOnCheckoutButton();
+        test.log(Status.INFO, "Clicked on the checkout button");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.setFirstName(firstName);
+        test.log(Status.INFO, "Enter first name");
         UtilMethods.waitForSeconds(1);
         checkoutPage.setLastName(lastName);
+        test.log(Status.INFO, "Enter last name");
         UtilMethods.waitForSeconds(1);
         checkoutPage.setPostalCode(postalCode);
+        test.log(Status.INFO, "Enter postal code");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.clickOnContinueCheckoutButton();
+        test.log(Status.INFO, "Clicked on continue checkout button");
         UtilMethods.waitForSeconds(1);
 
-        checkAssertion(firstName, lastName, postalCode);
+        checkAssertion(firstName, lastName, postalCode, test);
+        test.log(Status.INFO, "Tesing with first name: " + firstName + ", last name: " + lastName + ", postal code: " + postalCode );
 
         if (!firstName.isEmpty() && !lastName.isEmpty() && !postalCode.isEmpty()) {
             checkoutPage.clickOnCancelCheckoutButton();
@@ -109,28 +117,38 @@ public class CheckoutTest extends Base{
 
     @Test(priority = 3, groups = "checkout")
     public void totalPriceWithoutTaxTest(){
+        ExtentTest test = extent.createTest("Subtotal Amount Check");
         loginToSauceLabDemo();
+        test.log(Status.INFO, "User logged in");
         setInventoryPage();
         setCheckoutPage();
 
         inventoryPage.clickOnAddToCartSaucaeLabBackpack();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Backpack");
         UtilMethods.waitForSeconds(1);
         inventoryPage.clickOnAddToCartSauceLabsBikeLight();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Bike Light");
         UtilMethods.waitForSeconds(1);
 
         inventoryPage.clickOnCart();
+        test.log(Status.INFO, "Clicked on cart");
         UtilMethods.waitForSeconds(1);
         checkoutPage.clickOnCheckoutButton();
+        test.log(Status.INFO, "Clicked on checkout button");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.setFirstName("Babab");
+        test.log(Status.INFO, "Enter first name");
         UtilMethods.waitForSeconds(1);
         checkoutPage.setLastName("Yogurt");
+        test.log(Status.INFO, "Enter last name");
         UtilMethods.waitForSeconds(1);
         checkoutPage.setPostalCode("2397");
+        test.log(Status.INFO, "Enter postal code");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.clickOnContinueCheckoutButton();
+        test.log(Status.INFO, "Clicked on continue checkout button");
         UtilMethods.waitForSeconds(1);
 
         Double sauceLabsBackpackPrice = checkoutPage.getCheckoutFirstItemPrice();
@@ -140,7 +158,7 @@ public class CheckoutTest extends Base{
         Double expectedSubTotalPriceWithoutTax = sauceLabsBackpackPrice + sauceLabsBikeLightPrice;
 
         Assert.assertEquals(actulaSubTotalPriceWithoutTax, expectedSubTotalPriceWithoutTax);
-        System.out.println("Sub total price calculation is okay");
+        test.log(Status.PASS, "Sub total price calculation is okay");
 
         checkoutPage.clickOnCancelButtonFromCheckoutOverview();
         UtilMethods.waitForSeconds(1);
@@ -154,28 +172,39 @@ public class CheckoutTest extends Base{
 
     @Test(priority = 4, groups = "checkout")
     public void totalPriceTest(){
+        ExtentTest test = extent.createTest("Total Amount Check");
         loginToSauceLabDemo();
         setInventoryPage();
         setCheckoutPage();
 
         inventoryPage.clickOnAddToCartSaucaeLabBackpack();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Backpack");
         UtilMethods.waitForSeconds(1);
         inventoryPage.clickOnAddToCartSauceLabsBikeLight();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Bike Light");
         UtilMethods.waitForSeconds(1);
 
         inventoryPage.clickOnCart();
+        test.log(Status.INFO, "Clicked on cart");
         UtilMethods.waitForSeconds(1);
         checkoutPage.clickOnCheckoutButton();
+        test.log(Status.INFO, "Clicked on checkout button");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.setFirstName("Babab");
+        test.log(Status.INFO, "Enter first name");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.setLastName("Yogurt");
+        test.log(Status.INFO, "Enter last name");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.setPostalCode("2397");
+        test.log(Status.INFO, "Enter postal code");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.clickOnContinueCheckoutButton();
+        test.log(Status.INFO, "Clicked on continue checkout button");
         UtilMethods.waitForSeconds(1);
 
         Double subTotalPrice = checkoutPage.getSubTotalPriceWithoutTax();
@@ -185,7 +214,7 @@ public class CheckoutTest extends Base{
         Double expectedTotalPayableAmount = checkoutPage.getTotalPayableAmount();
 
         Assert.assertEquals(actualTotalPayableAmount, expectedTotalPayableAmount);
-        System.out.println("Total payable amount calculation is okay");
+        test.log(Status.PASS, "Total payable amount calculation is okay");
 
         checkoutPage.clickOnCancelButtonFromCheckoutOverview();
         UtilMethods.waitForSeconds(1);
@@ -197,28 +226,40 @@ public class CheckoutTest extends Base{
 
     @Test(priority = 5, groups = "checkout")
     public void cancelButtonTest(){
+        ExtentTest test = extent.createTest("Cancel Button Test of Checkout Overview");
         loginToSauceLabDemo();
+        test.log(Status.INFO, "User logged in");
         setInventoryPage();
         setCheckoutPage();
 
         inventoryPage.clickOnAddToCartSaucaeLabBackpack();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Backpack");
         UtilMethods.waitForSeconds(1);
         inventoryPage.clickOnAddToCartSauceLabsBikeLight();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Bike Light");
         UtilMethods.waitForSeconds(1);
 
         inventoryPage.clickOnCart();
+        test.log(Status.INFO, "Clicked on cart");
         UtilMethods.waitForSeconds(1);
         checkoutPage.clickOnCheckoutButton();
+        test.log(Status.INFO, "Clicked on checkout button");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.setFirstName("Babab");
+        test.log(Status.INFO, "Enter first name");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.setLastName("Yogurt");
+        test.log(Status.INFO, "Enter last name");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.setPostalCode("2397");
+        test.log(Status.INFO, "Enter postal code");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.clickOnContinueCheckoutButton();
+        test.log(Status.INFO, "Clicked on continue checkout button");
         UtilMethods.waitForSeconds(1);
         checkoutPage.clickOnCancelButtonFromCheckoutOverview();
 
@@ -226,7 +267,7 @@ public class CheckoutTest extends Base{
         String expectedProductPageTitle = "Products";
 
         Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
-        System.out.println("Cancel button is working fine");
+        test.log(Status.PASS, "Cancel button is working fine");
 
         inventoryPage.clickOnSauceLabsBackpackRemoveButton();
         UtilMethods.waitForSeconds(1);
@@ -236,108 +277,145 @@ public class CheckoutTest extends Base{
 
     @Test(priority = 6, groups = "checkout")
     public void completeCheckoutTest(){
+        ExtentTest test = extent.createTest("Checkout Complete Test");
+
         loginToSauceLabDemo();
+        test.log(Status.INFO, "User logger in");
         setInventoryPage();
         setCheckoutPage();
 
         inventoryPage.clickOnAddToCartSaucaeLabBackpack();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Backpack");
         UtilMethods.waitForSeconds(1);
+
         inventoryPage.clickOnAddToCartSauceLabsBikeLight();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Bike Light");
         UtilMethods.waitForSeconds(1);
 
         inventoryPage.clickOnCart();
-        UtilMethods.waitForSeconds(1);
-        checkoutPage.clickOnCheckoutButton();
+        test.log(Status.INFO, "Clicked on cart");
         UtilMethods.waitForSeconds(1);
 
+        checkoutPage.clickOnCheckoutButton();
+        UtilMethods.waitForSeconds(1);
+        test.log(Status.INFO, "Clicked on checkout button");
+
         checkoutPage.setFirstName("Babab");
+        test.log(Status.INFO, "Enter first name");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.setLastName("Yogurt");
+        test.log(Status.INFO, "Enter last name");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.setPostalCode("2397");
+        test.log(Status.INFO, "Enter postal code");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.clickOnContinueCheckoutButton();
+        test.log(Status.INFO, "Clicked on the continue checkout button");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.clickOnFinishButton();
+        test.log(Status.INFO, "Clicked on the finish button");
         UtilMethods.waitForSeconds(1);
 
         String actualSuccessfullCheckoutMessage = checkoutPage.getCheckoutSuccessfullMessage();
         String expectedSuccessfullCheckoutMessage = "Thank you for your order!";
 
         Assert.assertEquals(actualSuccessfullCheckoutMessage, expectedSuccessfullCheckoutMessage);
-        System.out.println("Checkout has been completed successfully");
+        test.log(Status.PASS, "Checkout has been completed successfully");
     }
 
     @Test(priority = 7, groups = "checkout")
     public void backHomeButtonTest(){
+        ExtentTest test = extent.createTest("Back Home Button Test");
+
         loginToSauceLabDemo();
+        test.log(Status.INFO, "User logged in");
         setInventoryPage();
         setCheckoutPage();
 
         inventoryPage.clickOnAddToCartSaucaeLabBackpack();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Backpack");
         UtilMethods.waitForSeconds(1);
+
         inventoryPage.clickOnAddToCartSauceLabsBikeLight();
+        test.log(Status.INFO, "Clicked on add to cart button of Sauce Labs Bike Light");
         UtilMethods.waitForSeconds(1);
 
         inventoryPage.clickOnCart();
+        test.log(Status.INFO, "Clicked on cart");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.clickOnCheckoutButton();
+        test.log(Status.INFO, "Clicked on checkout button");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.setFirstName("Babab");
+        test.log(Status.INFO, "Enter first name");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.setLastName("Yogurt");
+        test.log(Status.INFO, "Enter last name");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.setPostalCode("2397");
+        test.log(Status.INFO, "Enter postal code");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.clickOnContinueCheckoutButton();
+        test.log(Status.INFO, "Clicked on the continue checkout button");
         UtilMethods.waitForSeconds(1);
+
         checkoutPage.clickOnFinishButton();
+        test.log(Status.INFO, "Clicked on finish button");
         UtilMethods.waitForSeconds(1);
 
         checkoutPage.clickOnBackHomeButton();
+        test.log(Status.INFO, "Clicked on the back home button");
         UtilMethods.waitForSeconds(1);
 
         String actualProductPageTitle = inventoryPage.getActualProductPageTitle();
         String expectedProductPageTitle = "Products";
 
         Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
-        System.out.println("Back home button is working fine");
+        test.log(Status.PASS, "Back home button is working fine");
     }
 
 
-    private void checkAssertion(String firstName, String lastName, String postalCode){
+    private void checkAssertion(String firstName, String lastName, String postalCode, ExtentTest test){
         String actualString; 
         String expectedString; 
 
         switch(firstName + "_+_" + lastName + "_+_" + postalCode) {
-            case "_+_":
+            case "_+__+_":
+                test.warning("All fields are empty");
+                break;
             case "_+_Jener_+_1577":
-                System.out.println("Error: Firstname is required");
+                test.warning("Error: First Name is required");
                 actualString = checkoutPage.getActualErrorMessageForMissingFirstName();
                 expectedString = "Error: First Name is required";          
                 Assert.assertEquals(actualString, expectedString);
                 break;
             case "Kylee_+__+_5655":
-                System.out.println("Error: Lastname is required");
+                test.warning("Error: Last Name is required");
                 actualString = checkoutPage.getActualErrorMessageForMissingLastName();
                 expectedString = "Error: Last Name is required";          
                 Assert.assertEquals(actualString, expectedString);
                 break;
             case "Kylee_+_Jener_+_":
-                System.out.println("Error: Postal code is required");
+                test.warning("Error: Postal Code is required");
                 actualString = checkoutPage.getActualErrorMessageForMissingPostalCode();
                 expectedString = "Error: Postal Code is required";          
                 Assert.assertEquals(actualString, expectedString);
                 break;    
             case "Kylee_+_Jener_+_8873":
+                test.log(Status.INFO, "All info prived");
                 actualString = checkoutPage.getActualCheckoutOverviewPageTitle();
                 expectedString = "Checkout: Overview";          
                 Assert.assertEquals(actualString, expectedString);
-                System.out.println("Successfully landed to checkout overview page");
-
+                test.log(Status.PASS, "Successfully landed to checkout overview page");
         }
 
     }
@@ -369,6 +447,4 @@ public class CheckoutTest extends Base{
         driver = super.getActiveDriver();
         checkoutPage = new CheckoutPage(driver);
     }
-
-
 }

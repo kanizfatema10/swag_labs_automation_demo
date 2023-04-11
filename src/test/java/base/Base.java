@@ -1,5 +1,7 @@
 package base;
-
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -50,6 +52,13 @@ public class Base {
     @AfterTest
     public void afterTest(){
         extent.flush();
+        try {
+            Desktop.getDesktop().browse(new File("src/test/reports/swag_labs_automation_test.html").toURI());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
     }
 
     private void setActiveDriver(Drivers driver){

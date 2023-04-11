@@ -40,22 +40,22 @@ public class MenuTest extends Base{
     public void logoutTest(){
 
         ExtentTest test = extent.createTest("Menu Test", "Logout test");
-        test.log(Status.INFO, "Starting test");
         
         setInventoryPage();
         loginToSauceLabDemo();
+        test.log(Status.INFO, "User logged in");
 
         inventoryPage.clickOnBurgerMenu();
+        test.log(Status.INFO, "Clicked on kebab menu");
         UtilMethods.waitForSeconds(1);
         inventoryPage.clickOnLogoutMenu();
+        test.log(Status.INFO, "Clicked on logout");
         UtilMethods.waitForSeconds(1);
         String expectedLoginPageURL = "https://www.saucedemo.com/";
         String actualLoginPageURL = inventoryPage.getLoginPageURL();
         
         Assert.assertEquals(actualLoginPageURL, expectedLoginPageURL);
-        // System.out.println("Logout is working fine");
-        test.pass("Successfully landed on the checkout your info page");
-        test.log(Status.PASS, "Test passed");
+        test.log(Status.PASS, "User logged out and successfully landed on the login page");
     }
 
 
