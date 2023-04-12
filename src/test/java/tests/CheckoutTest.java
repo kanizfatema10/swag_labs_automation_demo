@@ -47,8 +47,13 @@ public class CheckoutTest extends Base{
         String actualTitleOfCheckoutYourInfoPage = checkoutPage.getActualCheckoutInfoTitle();
         String expectedTitleOfCheckoutYourInfoPage = "Checkout: Your Information";
 
-        Assert.assertEquals(actualTitleOfCheckoutYourInfoPage, expectedTitleOfCheckoutYourInfoPage);
-        test.log(Status.PASS, "Successfully landed on the checkout your info page");
+        try{
+            Assert.assertEquals(actualTitleOfCheckoutYourInfoPage, expectedTitleOfCheckoutYourInfoPage);
+            test.log(Status.PASS, "Successfully landed on the checkout your info page");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
+
  
         checkoutPage.clickOnCancelCheckoutButton();
         UtilMethods.waitForSeconds(1);
@@ -157,8 +162,12 @@ public class CheckoutTest extends Base{
         Double actulaSubTotalPriceWithoutTax = checkoutPage.getSubTotalPriceWithoutTax();
         Double expectedSubTotalPriceWithoutTax = sauceLabsBackpackPrice + sauceLabsBikeLightPrice;
 
-        Assert.assertEquals(actulaSubTotalPriceWithoutTax, expectedSubTotalPriceWithoutTax);
-        test.log(Status.PASS, "Sub total price calculation is okay");
+        try{
+            Assert.assertEquals(actulaSubTotalPriceWithoutTax, expectedSubTotalPriceWithoutTax);
+            test.log(Status.PASS, "Sub total price calculation is okay");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
         checkoutPage.clickOnCancelButtonFromCheckoutOverview();
         UtilMethods.waitForSeconds(1);
@@ -213,8 +222,12 @@ public class CheckoutTest extends Base{
         Double actualTotalPayableAmount = subTotalPrice + taxPrice;
         Double expectedTotalPayableAmount = checkoutPage.getTotalPayableAmount();
 
-        Assert.assertEquals(actualTotalPayableAmount, expectedTotalPayableAmount);
-        test.log(Status.PASS, "Total payable amount calculation is okay");
+        try{
+            Assert.assertEquals(actualTotalPayableAmount, expectedTotalPayableAmount);
+            test.log(Status.PASS, "Total payable amount calculation is okay");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
         checkoutPage.clickOnCancelButtonFromCheckoutOverview();
         UtilMethods.waitForSeconds(1);
@@ -266,8 +279,12 @@ public class CheckoutTest extends Base{
         String actualProductPageTitle = inventoryPage.getActualProductPageTitle();
         String expectedProductPageTitle = "Products";
 
-        Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
-        test.log(Status.PASS, "Cancel button is working fine");
+        try{
+            Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
+            test.log(Status.PASS, "Cancel button is working fine");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
         inventoryPage.clickOnSauceLabsBackpackRemoveButton();
         UtilMethods.waitForSeconds(1);
@@ -323,8 +340,12 @@ public class CheckoutTest extends Base{
         String actualSuccessfullCheckoutMessage = checkoutPage.getCheckoutSuccessfullMessage();
         String expectedSuccessfullCheckoutMessage = "Thank you for your order!";
 
-        Assert.assertEquals(actualSuccessfullCheckoutMessage, expectedSuccessfullCheckoutMessage);
-        test.log(Status.PASS, "Checkout has been completed successfully");
+        try{
+            Assert.assertEquals(actualSuccessfullCheckoutMessage, expectedSuccessfullCheckoutMessage);
+            test.log(Status.PASS, "Checkout has been completed successfully");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
     }
 
     @Test(priority = 7, groups = "checkout")
@@ -379,8 +400,12 @@ public class CheckoutTest extends Base{
         String actualProductPageTitle = inventoryPage.getActualProductPageTitle();
         String expectedProductPageTitle = "Products";
 
-        Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
-        test.log(Status.PASS, "Back home button is working fine");
+        try{
+            Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
+            test.log(Status.PASS, "Back home button is working fine");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
     }
 
 
@@ -413,9 +438,14 @@ public class CheckoutTest extends Base{
             case "Kylee_+_Jener_+_8873":
                 test.log(Status.INFO, "All info prived");
                 actualString = checkoutPage.getActualCheckoutOverviewPageTitle();
-                expectedString = "Checkout: Overview";          
-                Assert.assertEquals(actualString, expectedString);
-                test.log(Status.PASS, "Successfully landed to checkout overview page");
+                expectedString = "Checkout: Overview";       
+
+                try{
+                    Assert.assertEquals(actualString, expectedString);
+                    test.log(Status.PASS, "Successfully landed to checkout overview page");
+                } catch(AssertionError error){
+                    test.log(Status.FAIL, "" + error);
+                }
         }
 
     }

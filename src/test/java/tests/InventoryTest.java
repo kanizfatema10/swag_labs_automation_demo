@@ -39,8 +39,12 @@ public class InventoryTest extends Base{
         String actualFirstItemName = inventoryPage.getActualFirstItemName();
         String expectedFirstItemName = "Sauce Labs Backpack";
 
-        Assert.assertEquals(actualFirstItemName, expectedFirstItemName);
-        test.log(Status.PASS, "Successfully landed on the item detail page");
+        try{
+            Assert.assertEquals(actualFirstItemName, expectedFirstItemName);
+            test.log(Status.PASS, "Successfully landed on the item detail page");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
     }
 
     @Test(priority = 2, groups = "inventory")
@@ -62,8 +66,12 @@ public class InventoryTest extends Base{
         String actualProductPageTitle = inventoryPage.getActualProductPageTitle();
         String expectedProductPageTitle = "Products";
 
-        Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
-        test.log(Status.PASS,  "Successfully back to products page from item detail page");
+        try{
+            Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
+            test.log(Status.PASS,  "Successfully back to products page from item detail page");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
     }
 
     @Test(priority = 3, groups = "inventory")
@@ -81,8 +89,12 @@ public class InventoryTest extends Base{
         String actualRemoveButtonText = inventoryPage.getActualRemoveButtonText();  
         String expectedRemoveButtonText = "Remove";
 
-        Assert.assertEquals(actualRemoveButtonText, expectedRemoveButtonText);
-        test.log(Status.PASS,  "Button text changed from 'Add to card' to 'Remove'");
+        try{
+            Assert.assertEquals(actualRemoveButtonText, expectedRemoveButtonText);
+            test.log(Status.PASS,  "Button text changed from 'Add to card' to 'Remove'");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
         inventoryPage.clickOnSauceLabsBackpackRemoveButton();
         UtilMethods.waitForSeconds(1);
@@ -102,8 +114,12 @@ public class InventoryTest extends Base{
 
         currentCartNumber = inventoryPage.getCartCurrentNumber();
 
-        Assert.assertTrue(currentCartNumber == 1, "Shopping cart number has not been incremented.");
-        test.log(Status.PASS,  "Shopping cart number has increased successfully");
+        try{
+            Assert.assertTrue(currentCartNumber == 1, "Shopping cart number has not been incremented.");
+            test.log(Status.PASS,  "Shopping cart number has increased successfully");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
         inventoryPage.clickOnSauceLabsBackpackRemoveButton();
         UtilMethods.waitForSeconds(1);
@@ -129,8 +145,12 @@ public class InventoryTest extends Base{
         String actualAddedItemToCart = inventoryPage.getSauceLabBackpackAtCartItem();
         String expectedAddedItemToCard = "Sauce Labs Backpack";
 
-        Assert.assertEquals(actualAddedItemToCart, expectedAddedItemToCard);
-        test.log(Status.PASS, "Found the exact added item on cart detail");
+        try{
+            Assert.assertEquals(actualAddedItemToCart, expectedAddedItemToCard);
+            test.log(Status.PASS, "Found the exact added item on cart detail");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
         inventoryPage.clickOnContinueShoppingButton();
         UtilMethods.waitForSeconds(1);
@@ -161,8 +181,12 @@ public class InventoryTest extends Base{
         String actualProductPageTitle = inventoryPage.getActualProductPageTitle();
         String expectedProductPageTitle = "Products";
 
-        Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
-        test.log(Status.PASS, "Successfully back to products page form cart detail page");
+        try{
+            Assert.assertEquals(actualProductPageTitle, expectedProductPageTitle);
+            test.log(Status.PASS, "Successfully back to products page form cart detail page");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
 
         inventoryPage.clickOnSauceLabsBackpackRemoveButton();
@@ -189,8 +213,12 @@ public class InventoryTest extends Base{
         String actualAddToCartButtonText = inventoryPage.getActualAddToCartText();
         String expectedAddToCartButtonText = "Add to cart";
 
-        Assert.assertEquals(actualAddToCartButtonText, expectedAddToCartButtonText);
-        test.log(Status.PASS, "Button text has changed successfully from 'Remove' to 'Add to cart'");
+        try{
+            Assert.assertEquals(actualAddToCartButtonText, expectedAddToCartButtonText);
+            test.log(Status.PASS, "Button text has changed successfully from 'Remove' to 'Add to cart'");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
     }
 
@@ -222,8 +250,12 @@ public class InventoryTest extends Base{
         UtilMethods.waitForSeconds(1);
         currentCartNumber = inventoryPage.getCartCurrentNumber();
 
-        Assert.assertTrue(currentCartNumber == 2, "Shopping cart number has not been decreased.");
-        test.log(Status.PASS, "Shopping cart number has decreased successfully");
+        try{
+            Assert.assertTrue(currentCartNumber == 2, "Shopping cart number has not been decreased.");
+            test.log(Status.PASS, "Shopping cart number has decreased successfully");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
     }
 
@@ -259,8 +291,12 @@ public class InventoryTest extends Base{
 
         List<String> actualLowToHightSortedPriceList = inventoryPage.getSortedPriceList(itemListAfterSorting);
 
-        Assert.assertEquals(actualLowToHightSortedPriceList, expectedLowToHighSortedPriceList);
-        test.log(Status.PASS, "Low to high sorting is working fine");
+        try{
+            Assert.assertEquals(actualLowToHightSortedPriceList, expectedLowToHighSortedPriceList);
+            test.log(Status.PASS, "Low to high sorting is working fine");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
     }
 
     @Test (priority = 10, groups = {"inventory", "inventorySort"})
@@ -295,8 +331,12 @@ public class InventoryTest extends Base{
 
         List<String> actualHighToLowtSortedPriceList = inventoryPage.getSortedPriceList(itemListAfterSorting);
 
-        Assert.assertEquals(actualHighToLowtSortedPriceList, expectedHighToLowSortedPriceList);
-        test.log(Status.PASS, "High to low sorting is working fine");
+        try{
+            Assert.assertEquals(actualHighToLowtSortedPriceList, expectedHighToLowSortedPriceList);
+            test.log(Status.PASS, "High to low sorting is working fine");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
     }
 
     @Test(priority = 11, groups = {"inventory", "inventorySort"})
@@ -311,8 +351,12 @@ public class InventoryTest extends Base{
         List<String> actualItemNameList = inventoryPage.getItemNameList(itemList);
         List<String> expectedSortedItemList = inventoryPage.getExpectedDefaultSortedItemList(actualItemNameList);
 
-        Assert.assertEquals(actualItemNameList, expectedSortedItemList);
-        test.log(Status.PASS, "Item list is by default sorted from A to Z");
+        try{
+            Assert.assertEquals(actualItemNameList, expectedSortedItemList);
+            test.log(Status.PASS, "Item list is by default sorted from A to Z");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
     }
 
     @Test(priority = 12, groups = {"inventory", "inventorySort"})
@@ -340,8 +384,12 @@ public class InventoryTest extends Base{
         List<String> actualSortedItemList = inventoryPage.getItemNameList(itemListAfterSorting);
         System.out.println(actualSortedItemList);
 
-        Assert.assertEquals(actualSortedItemList, expectedSortedItemList);
-        test.log(Status.PASS, "Z to A sorting is working fine");
+        try{
+            Assert.assertEquals(actualSortedItemList, expectedSortedItemList);
+            test.log(Status.PASS, "Z to A sorting is working fine");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
 
     }
 

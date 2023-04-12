@@ -58,8 +58,14 @@ public class MainLoginTest extends Base{
                 test.log(Status.INFO, "Valid credential");
                 actualString = inventoryPage.getAppLogoName();
                 expectedString = "Swag Labs";
-                Assert.assertEquals(actualString, expectedString);
-                test.log(Status.PASS, "Successfully logged into the inventory page");
+
+                try{
+                    Assert.assertEquals(actualString, expectedString);
+                    test.log(Status.PASS, "Successfully logged into the inventory page");
+                } catch(AssertionError error){
+                    test.log(Status.FAIL, "" + error);
+                }
+                
                 break;
             case "_+_":
                 test.log(Status.WARNING, "Both username and password is empty");

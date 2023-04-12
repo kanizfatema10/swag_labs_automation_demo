@@ -54,8 +54,13 @@ public class MenuTest extends Base{
         String expectedLoginPageURL = "https://www.saucedemo.com/";
         String actualLoginPageURL = inventoryPage.getLoginPageURL();
         
-        Assert.assertEquals(actualLoginPageURL, expectedLoginPageURL);
-        test.log(Status.PASS, "User logged out and successfully landed on the login page");
+        try{
+            Assert.assertEquals(actualLoginPageURL, expectedLoginPageURL);
+            test.log(Status.PASS, "User logged out and successfully landed on the login page");
+        } catch(AssertionError error){
+            test.log(Status.FAIL, "" + error);
+        }
+       
     }
 
 

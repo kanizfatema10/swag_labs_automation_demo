@@ -55,7 +55,6 @@ public class Base {
         try {
             Desktop.getDesktop().browse(new File("src/test/reports/swag_labs_automation_test.html").toURI());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
