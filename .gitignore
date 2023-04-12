@@ -30,6 +30,7 @@ buildNumber.properties
 *.DS_Store
 *.class
 
+.vs
 .vscode/*
 .vscode/settings.json
 !.vscode/tasks.json
